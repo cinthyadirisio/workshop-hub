@@ -12,13 +12,15 @@ function Workshop() {
   const [comments, setComments] = useState([])
 
   useEffect(() => {
-    workshopQueries.getOneById(param.id).then(setWorkshop);
-    subjectQueries.getSubjects().then((subjects) => {
-      let workshopSubjects = subjects.filter(
-        (subject) => subject.workshop === workshop._id
-      );
-      setSubjects(workshopSubjects);
-    });
+    workshopQueries.getOneById(param.id).then((workshop)=>{
+      setWorkshop(workshop)
+      subjectQueries.getSubjects().then((subjects) => {
+        let workshopSubjects = subjects.filter(
+          (subject) => subject.workshop === workshop._id
+        );
+        setSubjects(workshopSubjects);
+      });
+  });
   }, []);
   console.log(workshop);
   console.log(subjects);

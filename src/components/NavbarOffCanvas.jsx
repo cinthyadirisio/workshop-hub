@@ -3,8 +3,10 @@ import CurrentDateHour from "./CurrentDateHour";
 import { Link } from "react-router-dom";
 import LinkNav from "./LinkNav";
 import UserData from "./UserData";
+import { useSelector } from "react-redux";
 
 function NavbarOffCanvas() {
+  const token = useSelector((store) => store.user.token);
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
@@ -51,16 +53,21 @@ function NavbarOffCanvas() {
             ></button>
           </div>
           <div className="offcanvas-body bg-dark text-light d-flex flex-column justify-content-between">
-
             <UserData />
 
             <div className="container d-flex flex-column flex-grow-1">
               <LinkNav content={"Home"} path={"/"} />
               <LinkNav content={"Workshops"} path={"/workshops"} />
-              <LinkNav content={"Registro"} path={"/register"} />
-              <LinkNav content={"Entrar"} path={"/login"} />
+              {!token ? (
+                <>
+                  <LinkNav content={"Registro"} path={"/register"} />
+                  <LinkNav content={"Entrar"} path={"/login"} />
+                </>
+              ) : (
+                <LinkNav content={"Salir"} />
+              )}
             </div>
-              <CurrentDateHour />
+            <CurrentDateHour />
           </div>
         </div>
       </div>
