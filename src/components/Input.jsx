@@ -5,7 +5,7 @@ function Input({
   value,
   onChange,
   placeholder,
-  className, options
+  className, options, role
 }) {
   return (
     <div className="d-flex p-2 justify-content-between">
@@ -26,6 +26,7 @@ function Input({
           value={value}
           onChange={onChange}
           placeholder={placeholder}
+          role={role}
         />
       )}
     </div>

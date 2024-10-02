@@ -1,12 +1,26 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import LinkNav from './LinkNav'
 
 function UserData() {
-  return (
-    <figure className='container'>
-        <img src="https://i.pinimg.com/originals/48/2f/8a/482f8a468ae0222b2a87dc5784a0dd2b.gif" className='img-thumbnail portrait_offcanvas' alt="user_photo" />
-        <figcaption>Nombre Apellido</figcaption>
+  const user = useSelector( store => store.user.user)
+  const role = ( role ) =>{
+    if (role === 'admin') return 'Administrador'
+    if (role === 'instructor') return 'Instructor'
+    if (role === 'user') return 'Usuario'
+
+  }
+  if (user){
+    return (
+    <figure className='container d-flex flex-column'>
+        <img src={user.photo} className='portrait_offcanvas' alt="user_photo" />
+        <figcaption>{user.firstName} {user.lastName}</figcaption>
+        <span>{role(user.role)}</span>
+        <LinkNav content={'Perfil Personal'} path={'/profile'} />
     </figure>
   )
+  }
+  return null
 }
 
 export default UserData

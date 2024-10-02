@@ -8,8 +8,8 @@ const initialStore = {
 const userReducer = createReducer( initialStore, (builder) =>{
     builder.addCase( userActions.login, (state, action) =>{
         const newStore = {...state}
-        newStore.user = action.user
-        newStore.token = action.token
+        newStore.user = action.payload.user
+        newStore.token = action.payload.token
         return newStore
     } )
     .addCase( userActions.logout, (state, action)=>{

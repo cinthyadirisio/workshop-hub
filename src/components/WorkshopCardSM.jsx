@@ -1,17 +1,17 @@
-import { Link } from 'react-router-dom'
+import LinkNav from "./LinkNav"
 
 function WorkshopCard({ _id, title, description, representativePhoto, isPast }) {
   return (
-    <div key={_id} className='bg-tran workshop_card p-2 text-light rounded' >
+    <div key={_id} className='bg-tran workshop_card p-2 text-light rounded d-flex flex-column justify-content-between' >
         <img src={representativePhoto} className="card-img-top" alt="representative photo of workshop" />
-        <span className="badge">
+        <span className={ isPast? 'badge text-info' : 'badge text-success'}>
             {
                 isPast ? 'Terminado' : 'Futuro'
             }
         </span>
-        <h4>{title}</h4>
+        <h5>{title}</h5>
         <p>{description}</p>
-        <Link to={`/workshops/${_id}`} className='align-self-end'>Detalles</Link>
+        <LinkNav path={`/workshops/${_id}`} content={'(+) Detalles'} />
     </div>
   )
 }

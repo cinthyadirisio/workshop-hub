@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import Input from "../../components/Input";
 import { useNavigate } from "react-router-dom";
-import userQueries from "../../services/userQueries";
+import authQueries from "../../services/authQueries";
+import { enqueueSnackbar } from "notistack";
+import userActions from "../../redux/actions/userActions";
+import { useDispatch } from "react-redux";
 
 function Register() {
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: "",
@@ -57,8 +61,8 @@ function Register() {
       label: "Rol",
       type: "select",
       options: [
+        { value: "user", label: "Usuario" },
         { value: "instructor", label: "Instructor" },
-        { value: "usuario", label: "Usuario" },
       ],
     },
   ];
@@ -75,14 +79,20 @@ function Register() {
       confirmPassword: e.target[5].value,
       role: e.target[6].value,
     }
-    userQueries.register(data).then( response =>{
-      if (response){
-        navigate('/login')
-      } else{
-        alert(response)
+    authQueries.register(data)
+    .then(response => {
+      if (response) {
+        dispatch(userActions.register(response.data))
+        enqueueSnackbar('Gracias por registrarte!', { variant: 'success' });
+        setTimeout(() => {
+          navigate('/login');
+        }, 2000);
       }
     })
-  }
+    .catch(error => {
+      enqueueSnackbar(`Error: ${error.message}`, { variant: 'error' });
+    });
+};
 
   return (
     <>

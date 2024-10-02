@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import Input from "../../components/Input";
 import { useNavigate } from "react-router-dom";
-import userQueries from "../../services/userQueries";
+import authQueries from "../../services/authQueries";
 import { useDispatch } from "react-redux";
 import userActions from "../../redux/actions/userActions";
+import { useSnackbar } from "notistack";
 
 function Login() {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
   const formFields = [
     {
@@ -31,20 +33,27 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e)
     const data = {
       email: e.target[0].value,
       password: e.target[1].value
-    }
-    userQueries.login(data).then( response =>{
-      if (response.token){
-        dispatch( userActions.login(response))
-        navigate('/workshops')
-      } else{
-        alert(response)
-      }
-    })
+    };
+    
+    authQueries.login(data)
+      .then(response => {
+        if (response) {
+          dispatch(userActions.login(response))
+          console.log(response)
+          enqueueSnackbar(`Bienvenidx ${response.data.firstName}`, { variant: 'success' });
+          setTimeout(() => {
+            navigate('/workshops');
+          }, 2000);
+        }
+      })
+      .catch(error => {
+        enqueueSnackbar(`Error: ${error.message}`, { variant: 'error' });
+      });
   };
+
   return (
     <>
       <form
@@ -69,7 +78,7 @@ function Login() {
             value="Borrar"
           />
           <input
-            className="btn btn btn-outline-success"
+            className="btn btn-outline-success"
             type="submit"
             value="Enviar"
           />

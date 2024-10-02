@@ -3,8 +3,11 @@ import { useParams } from "react-router-dom";
 import workshopQueries from "../../services/workshopQueries";
 import subjectQueries from "../../services/subjectQueries";
 import SubjectsCard from "../../components/SubjectsCard";
+import AddParticipant from "../../components/AddParticipant";
+import { useSelector } from "react-redux";
 
 function Workshop() {
+  const user = useSelector((store) => store.user.user)
 
   const param = useParams();
   const [workshop, setWorkshop] = useState({});
@@ -51,8 +54,11 @@ function Workshop() {
           </div>
           : <p>No hay comentarios sobre este workshop aun.</p>
         }
-        <button className="btn btn-outline-info bg-tran" >Inscribete al workshop!</button>
       </article>
+      {
+        user && <AddParticipant userId={user._id} workshopId={param.id} />
+      }
+      
     </>
   );
 }
