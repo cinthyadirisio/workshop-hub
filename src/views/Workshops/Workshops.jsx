@@ -2,15 +2,24 @@ import React, { useEffect, useState } from "react";
 import workshopQueries from "../../services/workshopQueries";
 import WorkshopCard from "../../components/WorkshopCardSM";
 import Input from "../../components/Input";
+import Loading from "../../components/Loading";
 
 function Workshops() {
-  const [workshops, setWorkshops] = useState([]);
-  const [searchText, setSearchText] = useState("");
-  const [isFuture, setIsFuture] = useState(false);
+  const [ workshops, setWorkshops ] = useState([]);
+  const [ searchText, setSearchText ] = useState("");
+  const [ isFuture, setIsFuture ] = useState(false);
+  const [ loading, setLoading ] = useState(true)
 
   useEffect(() => {
-    workshopQueries.getAll().then(setWorkshops);
+    workshopQueries.getAll().then((data) =>{
+      setWorkshops(data)
+      setLoading(false)
+  })
   }, []);
+
+  if (loading){
+    return <Loading />
+  }
 
   const handleSeach = (e) => {
     setSearchText(e.target.value);
