@@ -9,11 +9,10 @@ function LogoutButton() {
   const navigate = useNavigate()
 
   const handleLogout = () => {
-    dispatch(userActions.logout());
     enqueueSnackbar('Vuelve pronto!', {variant: 'info'})
-    setTimeout(()=>{
-      navigate('/')
-    }, 2000)
+    navigate('/')
+    dispatch(userActions.logout())
+    localStorage.removeItem('token')
   };
 
   return (

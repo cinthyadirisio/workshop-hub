@@ -15,7 +15,12 @@ const userReducer = createReducer( initialStore, (builder) =>{
     .addCase( userActions.logout, (state, action)=>{
         return initialStore
     })
-    
+    .addCase( userActions.update, (state, action) =>{
+        const newStore = {...state}
+        const newData = {...action.payload.user}
+        newStore.user = {...newStore.user, ...newData.user.data }
+        return newStore
+    } )
 })
 
 export default userReducer

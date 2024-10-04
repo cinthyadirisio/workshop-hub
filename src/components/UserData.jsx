@@ -16,7 +16,7 @@ function UserData() {
         <img src={user.photo} className='portrait_offcanvas' alt="user_photo" />
         <figcaption>{user.firstName} {user.lastName}</figcaption>
         <span>{role(user.role)}</span>
-        <LinkNav content={'Perfil Personal'} path={'/profile'} />
+        <LinkNav content={'Perfil Personal'} path={`/private/profile/${user._id}`} />
     </figure>
   )
   }

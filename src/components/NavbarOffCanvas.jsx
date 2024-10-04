@@ -1,23 +1,12 @@
 import CurrentDateHour from "./CurrentDateHour";
 import LinkNav from "./LinkNav";
 import UserData from "./UserData";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import LogoutButton from "./LogoutButton";
-import { enqueueSnackbar } from "notistack";
-import { useEffect } from "react";
-import store from "../redux/store";
 
 function NavbarOffCanvas() {
   const user = useSelector((store) => store.user)
   const token = useSelector((store) => store.user.token);
-  console.log(user, token)
-  const dispatch = useDispatch()
-
-  useEffect( ()=>{
-    if(token !== null){
-      enqueueSnackbar(`Bienvenidx ${user.firstName}!`, {variant: 'success'})
-    }
-  }, [token, enqueueSnackbar])
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
@@ -74,8 +63,8 @@ function NavbarOffCanvas() {
               <LinkNav content={"Workshops"} path={"/workshops"} />
               {!token ? (
                 <>
-                  <LinkNav content={"Registro"} path={"/register"} />
-                  <LinkNav content={"Entrar"} path={"/login"} />
+                  <LinkNav content={"Registro"} path={"/auth/register"} />
+                  <LinkNav content={"Entrar"} path={"/auth/login"} />
                 </>
               ) : (
                 <LogoutButton />

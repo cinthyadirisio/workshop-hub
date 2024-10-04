@@ -49,3 +49,5 @@ const commentQueries = {
     }
 
 }
+
+export default commentQueries

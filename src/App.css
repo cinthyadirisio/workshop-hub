@@ -61,3 +61,30 @@ main{
   border: 1px double #c9c9c9;
   padding: 5px;
 }
+
+.comment_photo{
+  height: 50px;
+}
+.comment__card span{
+  font-size: xx-small;
+}
+
+.user_profile_figure img{
+  height: 100px;
+  object-fit: contain;
+  border-radius: 15px;
+  border: 1px double #c9c9c9;
+  padding: 5px;
+}
+.notavailable{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+.notavailable img{
+  height: 250px;
+  border: 1px double #c9c9c9;
+  padding: 5px;
+}

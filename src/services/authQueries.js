@@ -16,11 +16,12 @@ const authQueries = {
         console.log(data)
         try {
             const response = await baseAPI.post('auth/login', data)
+            const token = response.data.response.token
+            localStorage.setItem('token', token)
             return response.data.response
         } catch (error) {
             console.log(error)
             throw new Error(error.response ? error.response.data.message : error.message)
-
         }
     },
     async deactivateUser(userId){
@@ -41,8 +42,20 @@ const authQueries = {
             console.log(error)
             throw new Error(error.response ? error.response.data.message : error.message)
         }
+    },
+    async loginToken(token){
+        try {
+            const response = await baseAPI.post(`auth/token`, {}, {
+                headers:{
+                    'authorization': 'Bearer ' + token
+                }
+            })
+            return response.data.response
+        } catch (error) {
+            console.log(error)
+            throw new Error(error.response ? error.response.data.message : error.message)
+        }
     }
-
 }
 
 export default authQueries

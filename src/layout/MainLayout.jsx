@@ -9,11 +9,11 @@ function MainLayout() {
         <NavbarOffCanvas />
       </header>
       {location.pathname === "/" ? (
-        <main className="container-fluid d-flex flex-column align-items-center justify-content-center purpleBlocks">
+        <main className="container-fluid d-flex flex-column align-items-center purpleBlocks p-2">
           <Outlet />
         </main>
       ) : (
-        <main className="container-fluid d-flex flex-column align-items-center justify-content-center">
+        <main className="container-fluid d-flex flex-column align-items-center  p-2">
           <Outlet />
         </main>
       )}

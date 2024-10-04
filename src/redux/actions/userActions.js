@@ -2,7 +2,6 @@ import { createAction } from "@reduxjs/toolkit";
 
 const userActions = {
     login: createAction('login', (data) => {
-        console.log(data)
         return {
             payload: {
                 user: data.data,
@@ -19,6 +18,13 @@ const userActions = {
     register : createAction('register', (data)=>{
         return {
             payload: {
+                user: data
+            }
+        }
+    }),
+    update: createAction('update', (data)=>{
+        return {
+            payload:{
                 user: data
             }
         }

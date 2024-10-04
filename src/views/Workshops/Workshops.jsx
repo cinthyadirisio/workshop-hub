@@ -39,7 +39,7 @@ function Workshops() {
 
   return (
     <>
-      <div className="d-flex flex-column bg-tran container-fluid rounded text-light mt-1">
+      <div className="d-flex flex-column bg-tran container-fluid rounded text-light mt-1 p-1">
         <Input
           id={"search"}
           type={"text"}
