@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import workshopQueries from "../services/workshopQueries";
 import subjectQueries from "../services/subjectQueries";
 import Input from "./Input";
+import { enqueueSnackbar } from "notistack";
 
 function CreateSubjects() {
   const user = useSelector((store) => store.user.user);
@@ -69,6 +70,10 @@ function CreateSubjects() {
         label={"Descripción"}
         id={"description"}
       />
+      <div className="d-flex gap-2">
+        <button className="btn btn-outline-info" type="reset">Borrar</button>
+        <button className="btn btn-outline-success">Guardar</button>
+      </div>
     </form>
   );
 }

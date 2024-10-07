@@ -14,16 +14,17 @@ function EditSubjects() {
   const [workshopId, setWorkshopId] = useState("");
   const [subjectId, setSubjectId] = useState("");
   const [subject, setSubject] = useState({});
-
-  useEffect(() => {
-    workshopQueries.getAll().then((workshops) => {
+ const fetchInfo = () =>{
+  workshopQueries.getAll().then((workshops) => {
       const ownWorkshops = workshops.filter(
         (workshop) => workshop.instructorId === user._id
       );
       setInstructorWorkshops(ownWorkshops);
-      console.log(ownWorkshops);
-    });
-  }, [user]);
+      console.log(ownWorkshops);})
+ }
+  useEffect(() => {
+    fetchInfo()}, [user]);
+
   const handleChange = (e) => {
     const workshopId = e.target.value;
     setIsEditing(false);
@@ -33,7 +34,7 @@ function EditSubjects() {
           (subject) => subject.workshop === workshopId
         );
         setSubjects(workshopSubjects);
-        console.log(workshopSubjects);
+        fetchInfo()
       });
     }
   };
@@ -46,6 +47,7 @@ function EditSubjects() {
       .catch((error) => console.log(error));
     console.log(subject);
     setIsEditing(!isEditing);
+    fetchInfo()
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -60,6 +62,7 @@ function EditSubjects() {
       .then((response) => {
         if (response) {
           setIsEditing(false);
+          fetchInfo()
           enqueueSnackbar(`La materia ha sido actualizada con exito`, {
             variant: "success",
           });
@@ -88,6 +91,7 @@ function EditSubjects() {
           .then((response) => {
             if (response) {
               setIsEditing(false);
+              fetchInfo()
               enqueueSnackbar(`${title} ha sido borrado con éxito`, {
                 variant: "success",
               });
@@ -134,7 +138,7 @@ function EditSubjects() {
                     {subject.description}
                   </li>
                 </ul>
-                <div className="d-flex justify-content-around p-1">
+                <div className="d-flex gap-2 p-1">
                   <button
                     onClick={() => handleEdit(subject._id, subject.workshop)}
                     className="btn btn-outline-info"

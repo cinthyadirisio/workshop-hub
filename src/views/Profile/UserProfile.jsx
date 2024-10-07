@@ -65,7 +65,7 @@ function UserProfile() {
               label="Nombre"
               type="text"
               onChange={handleInputChange}
-              placeholder="Nombre"
+              defaultValue={user.firstName}
               className="form-control-sm col-7 rounded bg-tran text-light"
             />
             <Input
@@ -73,14 +73,14 @@ function UserProfile() {
               label="Apellido"
               type="text"
               onChange={handleInputChange}
-              placeholder="Apellido"
-              className="form-control-sm col-7 rounded bg-tran text-light"
+              defaultValue={user.lastName}
+                className="form-control-sm col-7 rounded bg-tran text-light"
             />
             <Input
               id="photo"
               label="Foto de perfil"
               type="url"
-              placeholder={user.photo}
+              defaultValue={user.photo}
               className="form-control-sm col-7 rounded bg-tran text-light"
             />
             <div className="d-flex justify-content-center gap-1">

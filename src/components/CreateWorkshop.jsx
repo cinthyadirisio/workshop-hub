@@ -94,8 +94,8 @@ function CreateWorkshop() {
               defaultValue={field.defaultValue}
             />
           ))}
-          <div className="d-flex justify-content-around">
-            <button className="btn btn-outline-danger" type="reset">Reset</button>
+          <div className="d-flex gap-2">
+            <button className="btn btn-outline-danger" type="reset">Borrar</button>
             <button className="btn btn-outline-success">Guardar</button>
           </div>
         </form>

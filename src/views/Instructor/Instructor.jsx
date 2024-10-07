@@ -16,7 +16,6 @@ function Instructor() {
         (workshop) => workshop.instructorId === user._id
       );
       setInstructorWorkshops(ownWorkshops);
-      console.log(ownWorkshops);
     });
   }, [user]);
 

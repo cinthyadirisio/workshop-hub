@@ -42,11 +42,14 @@ function Workshop() {
       setStartDate(convertirUTCaLocal(workshop.startDate));
       setEndDate(convertirUTCaLocal(workshop.endDate));
     });
-  }, []);
+  }, [param.id]);
   return (
     <>
       <article className="d-flex flex-column justify-content-center gap-1 p-3">
+
+
         <div className="p-2 rounded bg-tran text-light">
+          <img className='workshop__photo' src={workshop.representativePhoto} alt="workshop representative photo" />
           <h3>{workshop.title}</h3>
           <p>Horario de cursada: {workshop.schedule}</p>
           {!workshop.isPast ? (
@@ -63,23 +66,30 @@ function Workshop() {
           ))}
         </div>
         {comments.length > 0 ? (
-          <div className="p-2 rounded  bg-tran text-light">
+          <div className="p-2 rounded bg-tran text-light">
             {comments.map((comment) => {
               console.log(comment);
               return <Comment key={comment._id} {...comment} />;
             })}
           </div>
         ) : (
+          <div className="p-2 rounded bg-tran text-light text-center">
           <p>No hay comentarios sobre este workshop aun.</p>
+          </div>
         )}
       </article>
-      <div className="p-2 rounded  bg-tran text-light mb-1">
-        {(!workshop.isPast && user && <AddParticipant />) || (
-          <LinkNav
+      <div className="container-fluid p-2 rounded bg-tran text-light mb-1 text-center">
+        {
+          !workshop.isPast && user && (
+            <AddParticipant />
+          )}
+          { !workshop.isPast && !user && (
+            <LinkNav
             content={"Entra en tu cuenta y participa en el curso"}
             path={"/auth/login"}
           />
-        )}
+          )}
+          { workshop.isPast && ( <p>No puedes inscribirte en un workshop que ya terminó</p> )}
       </div>
     </>
   );

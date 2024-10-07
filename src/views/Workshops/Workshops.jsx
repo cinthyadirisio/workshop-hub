@@ -39,7 +39,7 @@ function Workshops() {
 
   return (
     <>
-      <div className="d-flex flex-column bg-tran container-fluid rounded text-light mt-1 p-1">
+      <div className="d-flex flex-column bg-tran container-fluid rounded text-light mt-1 p-2">
         <Input
           id={"search"}
           type={"text"}
@@ -48,7 +48,7 @@ function Workshops() {
           onChange={handleSeach}
           label={"Busca por título"}
         />
-        <div className="form-check form-switch">
+        <div className="form-check form-switch ">
           <input
             className="form-check-input"
             type="checkbox"

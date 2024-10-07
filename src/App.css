@@ -52,7 +52,10 @@ main{
   width: 250px;
 
 }
-
+.workshop_card img{
+  height: 220px;
+  object-fit: cover;
+}
 .portrait_offcanvas{
   width: 100px;
   height: 100px;
@@ -87,4 +90,16 @@ main{
   height: 250px;
   border: 1px double #c9c9c9;
   padding: 5px;
+}
+.form_changepass{
+  border: 1px double whitesmoke;
+  padding: 10px;
+  border-radius: 10px;
+}
+.workshop__photo{
+  height: 200px;
+  width: 100%;
+  padding: 10px;
+  object-fit: cover;
+  border-radius: 20px;
 }
