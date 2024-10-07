@@ -43,7 +43,6 @@ function Workshop() {
       setEndDate(convertirUTCaLocal(workshop.endDate));
     });
   }, []);
-  console.log(comments);
   return (
     <>
       <article className="d-flex flex-column justify-content-center gap-1 p-3">

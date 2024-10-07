@@ -9,15 +9,6 @@ import { useDispatch } from "react-redux";
 function Register() {
   const dispatch = useDispatch()
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    photo: "",
-    password: "",
-    confirmPassword: "",
-    role: "",
-  });
 
   const formFields = [
     {

@@ -17,6 +17,7 @@ function UserData() {
         <figcaption>{user.firstName} {user.lastName}</figcaption>
         <span>{role(user.role)}</span>
         <LinkNav content={'Perfil Personal'} path={`/private/profile/${user._id}`} />
+        <LinkNav content={'Panel de Instructor'} path={`/private/instructor`} />
     </figure>
   )
   }

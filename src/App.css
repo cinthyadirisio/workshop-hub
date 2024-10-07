@@ -34,7 +34,7 @@ main {
 }
 
 main{
-  background-image: url('https://i.pinimg.com/originals/29/50/c2/2950c22cb6d769e5b442e5088af01174.jpg');
+  background-image: url('https://static.vecteezy.com/system/resources/previews/003/172/550/large_2x/light-green-abstract-mosaic-pattern-vector.jpg');
   background-size: cover;
 }
 .linkNav {
@@ -70,7 +70,7 @@ main{
 }
 
 .user_profile_figure img{
-  height: 100px;
+  height: 200px;
   object-fit: contain;
   border-radius: 15px;
   border: 1px double #c9c9c9;

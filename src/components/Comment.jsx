@@ -27,16 +27,16 @@ function Comment({ _id, date, comment, userId, rating }) {
   }, [userId, date]);
 
   return (
-    <div class="card comment__card" key={_id}>
-      <div class="card-header bg-tran d-flex align-items-baseline gap-2">
+    <div className="card comment__card" key={_id}>
+      <div className="card-header bg-tran d-flex align-items-baseline gap-2">
         <img className="comment_photo" src={user.photo} alt="user_photo" />
         <p>{user.firstName} {user.lastName}</p>
       </div>
-      <div class="card-body bg-tran">
-        <blockquote class="blockquote mb-0">
+      <div className="card-body bg-tran">
+        <blockquote className="blockquote mb-0">
           <span>{localDate}</span>
           <p>{comment}</p>
-          <footer class="blockquote-footer">{generarEstrellas(rating)}</footer>
+          <footer className="blockquote-footer">{generarEstrellas(rating)}</footer>
         </blockquote>
       </div>
     </div>

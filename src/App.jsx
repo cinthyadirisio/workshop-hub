@@ -15,6 +15,7 @@ import NotAvailable from "./components/NotAvailable";
 import { enqueueSnackbar } from "notistack";
 import PrivateAuthGuard from "./guard/PrivateAuthGuard";
 import NoUserRoutes from "./guard/NoUserRoutes";
+import Instructor from "./views/Instructor/Instructor";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ function App() {
           });
         })
         .catch((error) => {
+          console.log(error)
           enqueueSnackbar(`Error: ${error.message}`, { variant: "error" });
         });
     }
@@ -50,6 +52,7 @@ function App() {
             </Route>
             <Route path="/private" element={<PrivateAuthGuard />}>
               <Route path={"/private/profile/:id"} element={<UserProfile />} />
+              <Route path={"/private/instructor"} element={<Instructor />} />
             </Route>
             <Route path="*" element={<NotAvailable />} />
           </Route>

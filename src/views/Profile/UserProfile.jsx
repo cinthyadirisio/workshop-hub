@@ -6,12 +6,15 @@ import userQueries from "../../services/userQueries";
 import Input from "../../components/Input";
 import { enqueueSnackbar } from "notistack";
 import userActions from "../../redux/actions/userActions";
+import ProfileWorkshops from "../../components/ProfileWorkshops";
+import InstructorPanel from "../../components/InstructorPanel";
+import LogoutButton from "../../components/LogoutButton";
+import ChangePassword from "../../components/ChangePassword";
 
 function UserProfile() {
   const dispatch = useDispatch()
   const user = useSelector((store) => store.user.user);
 
-  const [userWorkshops, setUserWorkshops] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [userData, setUserData] = useState({});
 
@@ -23,10 +26,6 @@ function UserProfile() {
 
   useEffect(() => {
     setUserData(user);
-    workshopQueries.getAll().then((workshops) => {
-      const workshopsUser = workshops?.filter((workshop) => workshop.participants.includes(user._id));
-      if (workshopsUser.length > 0) setUserWorkshops(workshopsUser);
-    });
   }, [user, isEditing]);
 
   const handleInputChange = (e) => {
@@ -61,13 +60,34 @@ function UserProfile() {
       {isEditing ? (
         <>
           <div className="container-fluid d-flex flex-column bg-tran rounded w-100 text-light p-2 justify-content-around">
-            <Input id="firstName" label="Nombre" type="text" onChange={handleInputChange} placeholder="Nombre" className="form-control-sm col-7 rounded bg-tran text-light" />
-            <Input id="lastName" label="Apellido" type="text" onChange={handleInputChange} placeholder="Apellido" className="form-control-sm col-7 rounded bg-tran text-light" />
             <Input
-              id="email" label="Email" type="email" onChange={handleInputChange} placeholder="Email" className="form-control-sm col-7 rounded bg-tran text-light" />
-            <Input id='photo' label='Foto de perfil' type="url" placeholder={user.photo} className="form-control-sm col-7 rounded bg-tran text-light" />
+              id="firstName"
+              label="Nombre"
+              type="text"
+              onChange={handleInputChange}
+              placeholder="Nombre"
+              className="form-control-sm col-7 rounded bg-tran text-light"
+            />
+            <Input
+              id="lastName"
+              label="Apellido"
+              type="text"
+              onChange={handleInputChange}
+              placeholder="Apellido"
+              className="form-control-sm col-7 rounded bg-tran text-light"
+            />
+            <Input
+              id="photo"
+              label="Foto de perfil"
+              type="url"
+              placeholder={user.photo}
+              className="form-control-sm col-7 rounded bg-tran text-light"
+            />
             <div className="d-flex justify-content-center gap-1">
-              <button className="btn btn-outline-danger"  onClick={() => setIsEditing(false)}>
+              <button
+                className="btn btn-outline-danger"
+                onClick={() => setIsEditing(false)}
+              >
                 Cancelar
               </button>
               <button className="btn btn-outline-success" onClick={handleSave}>
@@ -83,38 +103,30 @@ function UserProfile() {
               <figure className="user_profile_figure">
                 <img src={user.photo} alt="user_photo" />
               </figure>
-              <div className="d-flex flex-column">
+              <div className="d-flex flex-column text-center">
                 <h3>
                   {user.firstName} {user.lastName}
                 </h3>
                 <p>{user.email}</p>
-                <h4>{role(user.role)}</h4>
+                <p>{role(user.role)}</p>
+                <div className="d-flex flex-column gap-1">
+
+                <button
+                  className="btn btn-outline-light"
+                  onClick={() => setIsEditing(true)}
+                >
+                  Editar tu Información
+                </button>
+                <ChangePassword />
+                <LogoutButton />
+                  </div>
               </div>
-            </div>
-            <div className="d-flex justify-content-center gap-1">
-              <button
-                className="btn btn-outline-light"
-                onClick={() => setIsEditing(true)}
-              >
-                Editar
-              </button>
             </div>
           </article>
         </>
       )}
 
-      <div className="container-fluid bg-tran rounded w-100 text-light p-3">
-        <h5 className="text-decoration-underline">Mis Workshops</h5>
-        {userWorkshops.length > 0 ? (
-          <div>
-            {userWorkshops.map((workshop) => (
-              <LinkNav key={workshop._id} content={workshop.title} path={`/workshop/${workshop._id}`} />
-            ))}
-          </div>
-        ) : (
-          <p>No estás inscripto en ningún workshop aún</p>
-        )}
-      </div>
+      <ProfileWorkshops />
     </div>
   );
 }

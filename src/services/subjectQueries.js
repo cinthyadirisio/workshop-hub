@@ -3,7 +3,7 @@ import baseAPI from "./API";
 const subjectQueries = {
     async getSubjects(){
         try {
-            const response = await baseAPI(`subjects/`)
+            const response = await baseAPI(`subjects`)
             return response.data.response
         } catch (error) {
             console.log(error)

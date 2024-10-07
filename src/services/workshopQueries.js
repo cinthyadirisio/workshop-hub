@@ -41,7 +41,7 @@ const workshopQueries = {
     async deleteWorkshop(workshopId){
         console.log(workshopId)
         try {
-            const response = await baseAPI.delete(`workshops`, workshopId)
+            const response = await baseAPI.delete(`workshops/${workshopId}`)
             return response.data.response
         } catch (error) {
             console.log(error)
@@ -51,7 +51,7 @@ const workshopQueries = {
     async updateWorkshop(workshopId, newData){
         console.log(workshopId, newData)
         try {
-            const response = await baseAPI.put(`workshops`, newData)
+            const response = await baseAPI.put(`workshops/${workshopId}`, newData)
             return response.data.response
         } catch (error) {
             console.log(error)
